@@ -1,0 +1,23 @@
+name: .NET CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install .NET 10 SDK
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.0.x'
+      - name: Restore
+        run: dotnet restore tests/TradingOrders.Tests/TradingOrders.Tests.csproj
+      - name: Build API
+        run: dotnet build src/TradingOrders.Api/TradingOrders.Api.csproj --configuration Release
+      - name: Run tests
+        run: dotnet test tests/TradingOrders.Tests/TradingOrders.Tests.csproj --configuration Release

@@ -1,0 +1,19 @@
+# .NET build artifacts
+**/bin/
+**/obj/
+.vs/
+.vscode/
+.idea/
+*.user
+*.suo
+TestResults/
+coverage/
+# Demo SQLite databases
+*.db
+*.db-shm
+*.db-wal
+# Secrets and local configuration
+.env
+*.pfx
+*.pem
+secrets.json
