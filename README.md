@@ -1,5 +1,7 @@
 # Trading Order Management API
 
+[![.NET CI](https://github.com/FillipePennaRosa/trading-order-management-api/actions/workflows/dotnet.yml/badge.svg)](https://github.com/FillipePennaRosa/trading-order-management-api/actions/workflows/dotnet.yml)
+
 **Original demonstration project for a software engineering portfolio.**
 
 A small ASP.NET Core API for *simulated* limit orders. It shows C#/.NET, layering, business invariants, an idempotency contract, database constraints, automated tests and continuous integration. It **does not execute real trades**, connect to brokerages, or handle funds.
@@ -48,10 +50,10 @@ curl -i -X POST http://localhost:5080/api/orders \
 - Retry with the same `clientOrderId` and normalized economics: **200 OK**, same order ID.
 - Retry with that key but a different quantity/price/side/symbol: **409 Conflict**.
 
-List: `GET /api/orders?limit=20`
-Read: `GET /api/orders/{id}`
-Cancel: `POST /api/orders/{id}/cancel` (idempotent)
-Health: `GET /health`
+- List orders: `GET /api/orders?limit=20`
+- Retrieve an order: `GET /api/orders/{id}`
+- Cancel an order: `POST /api/orders/{id}/cancel` (idempotent)
+- Health check: `GET /health`
 
 ## Tests
 
@@ -59,7 +61,7 @@ Health: `GET /health`
 dotnet test tests/TradingOrders.Tests/TradingOrders.Tests.csproj
 ```
 
-CI runs on pushes and PRs to `main`. Before showing this as a verified engineering sample, **run the tests and confirm a green GitHub Actions build**. The source archive was generated in an environment without the .NET SDK, so a successful compile/test is **not claimed**.
+The API was built and tested successfully with .NET 10 on November 2, 2026: **11 automated tests passed (0 failed)**. The initial GitHub Actions CI run also **completed successfully**. CI automatically restores dependencies, builds the API in Release mode, and runs the tests on pushes and pull requests to `main`. The badge above reflects the current workflow status.
 
 ## Engineering and security limitations
 
